@@ -68,16 +68,16 @@ function extractContentEntries(
   }
 
   // ENV var for benchmarking. If its not provided, the normal app functionality will occur
-  if (!import.meta.env.NUMBER_OF_PAGES) {
+  if (!import.meta.env.VITE_NUMBER_OF_PAGES) {
     return fetchResponse?.data?.productCollection?.items
   }
 
   // Build extra pages
   const pages = fetchResponse?.data?.productCollection?.items
-  const numberOfPages = Number(import.meta.env.NUMBER_OF_PAGES) - pages.length
+  const numberOfPages = Number(import.meta.env.VITE_NUMBER_OF_PAGES) - pages.length
 
-  const extraPagesForBenchmarking = [...Array(numberOfPages).keys()].map(
-    (index) => {
+  const extraPagesForBenchmarking = Array.from({ length: numberOfPages}).map(
+    (_item, index) => {
       const pageIndex = index % pages.length
 
       return {

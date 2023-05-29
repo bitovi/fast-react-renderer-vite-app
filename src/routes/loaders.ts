@@ -9,14 +9,14 @@ async function homeLoader() {
   const total = contents?.length
 
   return {
-    contents: toShow,
+    contents,
     showing,
     total,
   }
 }
 
 async function contentLoader({ params }: LoaderFunctionArgs) {
-  const content = await getContentBySlug(params?.slug as string)
+  const content = await getContentBySlug(params?.slug?.split("-benchmark")?.[0] as string)
   return content
 }
 

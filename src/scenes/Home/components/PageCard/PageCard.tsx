@@ -21,6 +21,9 @@ const PageCard: FC<{ content: Content }> = ({ content }) => {
             <div className={styles.cardSub}>
               {documentToReactComponents(content.description.json)}
             </div>
+            <div className={styles.price}>
+              <span>{`$${content.price / 100}`}</span>
+            </div>
           </div>
         </div>
       </article>

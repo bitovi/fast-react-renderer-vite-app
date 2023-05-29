@@ -9,7 +9,7 @@ async function homeLoader() {
   const total = contents?.length
 
   return {
-    contents,
+    contents: toShow,
     showing,
     total,
   }

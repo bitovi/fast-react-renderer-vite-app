@@ -46,5 +46,5 @@ jobs:
           
           aws_spa_cdn_enabled: true
           
-          aws_r53_domain_name: dev.fast-react-static-renderer-vite.com
-          aws_r53_sub_domain_name: spa
+          aws_r53_domain_name:
+          aws_r53_sub_domain_name:

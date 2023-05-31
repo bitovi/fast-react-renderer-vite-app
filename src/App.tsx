@@ -1,9 +1,10 @@
 import { RouterProvider } from "react-router"
+import type { ReactElement } from "react"
 
 import router from "./routes"
 import Layout from "@shared/components/Layout"
 
-function App() {
+function App(): ReactElement {
   return (
     <div className="App">
       <Layout>

@@ -1,7 +1,10 @@
-import { getAllContents, getContentBySlug } from "@shared/services/content"
-import { LoaderFunctionArgs } from "react-router-dom"
+import type { LoaderFunctionArgs } from "react-router-dom"
 
-async function homeLoader() {
+import { getAllContents, getContentBySlug } from "@shared/services/content"
+import type { HomeProps } from "@scenes/Home"
+import type { Content } from "@shared/interfaces/Content"
+
+async function homeLoader(): Promise<HomeProps> {
   const contents = await getAllContents()
   const toShow = contents?.slice(0, 9)
 
@@ -15,7 +18,7 @@ async function homeLoader() {
   }
 }
 
-async function contentLoader({ params }: LoaderFunctionArgs) {
+async function contentLoader({ params }: LoaderFunctionArgs): Promise<Content> {
   const content = await getContentBySlug(params?.slug?.split("-benchmark")?.[0] as string)
   return content
 }

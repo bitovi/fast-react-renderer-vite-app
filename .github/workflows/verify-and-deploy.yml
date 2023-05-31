@@ -1,0 +1,52 @@
+name: Verify and Deploy
+
+on: [push]
+
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Typecheck
+        run: npm run typecheck
+      - name: ESLint
+        run: npm run eslint
+      - name: Prettier
+        run: npm run prettier
+      - name: depcheck
+        run: npm run depcheck
+
+      - name: Build
+        env:
+          VITE_CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          VITE_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+        run: npm run build
+
+      - name: Deploy
+        uses: bitovi/github-actions-deploy-serverless-website@vite
+        if: github.ref == 'refs/heads/main'
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+          aws_default_region: us-east-1
+  
+          tf_action: 'apply'
+          tf_state_bucket_destroy: true
+          
+          aws_spa_cdn_enabled: true
+          aws_spa_source_folder: dist
+          checkout: false
+          
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: vite-frsr

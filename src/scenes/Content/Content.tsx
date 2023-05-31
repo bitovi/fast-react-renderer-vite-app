@@ -1,14 +1,10 @@
 import type { FC } from "react"
-import { useLoaderData } from "react-router-dom"
-
-import type { Content } from "@shared/interfaces"
-
-import { Link } from "react-router-dom"
-
+import { useLoaderData, Link } from "react-router-dom"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-import styles from "./Content.module.css"
+import type { Content } from "@shared/interfaces"
 import ContentfulImage from "@shared/components/ContentfulImage"
+import styles from "./Content.module.css"
 
 const ContentDetail: FC = () => {
   const content = useLoaderData() as Content
@@ -24,7 +20,7 @@ const ContentDetail: FC = () => {
       </div>
       <h1>{content.name}</h1>
       <div className={styles.content}>
-      <ContentfulImage
+        <ContentfulImage
           src={content.image.url}
           alt={content.image.title}
           width={+content.image.width}

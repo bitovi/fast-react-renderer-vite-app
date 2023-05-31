@@ -35,7 +35,7 @@ jobs:
 
       - name: Deploy
         uses: bitovi/github-actions-deploy-serverless-website@vite
-        #if: github.ref == 'refs/heads/main'?
+        if: github.ref == 'refs/heads/main'
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
@@ -48,5 +48,5 @@ jobs:
           aws_spa_source_folder: dist
           checkout: false
           
-          aws_r53_domain_name:
-          aws_r53_sub_domain_name:
+          aws_r53_domain_name: bitovi-sandbox.com
+          aws_r53_sub_domain_name: vite-frsr

@@ -9,8 +9,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          clean: false
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
@@ -36,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: bitovi/github-actions-deploy-serverless-website@main
+        uses: bitovi/github-actions-deploy-serverless-website@vite
         #if: github.ref == 'refs/heads/main'?
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
@@ -48,6 +46,7 @@ jobs:
           
           aws_spa_cdn_enabled: true
           aws_spa_source_folder: dist
+          checkout: false
           
           aws_r53_domain_name:
           aws_r53_sub_domain_name:

@@ -4,7 +4,6 @@ import Home from "@scenes/Home"
 import ContentDetail from "@scenes/Content"
 import { contentLoader, homeLoader } from "./loaders"
 
-
 const router = createHashRouter([
   {
     path: "/",

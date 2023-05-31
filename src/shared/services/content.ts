@@ -78,9 +78,10 @@ function extractContentEntries(
 
   // Build extra pages
   const pages = fetchResponse?.data?.productCollection?.items
-  const numberOfPages = Number(import.meta.env.VITE_NUMBER_OF_PAGES) - pages.length
+  const numberOfPages =
+    Number(import.meta.env.VITE_NUMBER_OF_PAGES) - pages.length
 
-  const extraPagesForBenchmarking = Array.from({ length: numberOfPages}).map(
+  const extraPagesForBenchmarking = Array.from({ length: numberOfPages }).map(
     (_item, index) => {
       const pageIndex = index % pages.length
 

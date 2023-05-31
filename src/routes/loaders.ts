@@ -19,7 +19,9 @@ async function homeLoader(): Promise<HomeProps> {
 }
 
 async function contentLoader({ params }: LoaderFunctionArgs): Promise<Content> {
-  const content = await getContentBySlug(params?.slug?.split("-benchmark")?.[0] as string)
+  const content = await getContentBySlug(
+    params?.slug?.split("-benchmark")?.[0] as string,
+  )
   return content
 }
 

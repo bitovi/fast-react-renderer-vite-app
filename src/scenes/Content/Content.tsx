@@ -20,7 +20,7 @@ const ContentDetail: FC = () => {
       </div>
       <h1>{content.name}</h1>
       <div className={styles.content}>
-      <ContentfulImage
+        <ContentfulImage
           src={content.image.url}
           alt={content.image.title}
           width={+content.image.width}

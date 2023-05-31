@@ -14,7 +14,7 @@ export interface HomeProps {
 }
 
 const Home = (): ReactElement => {
-  const { contents, showing, total } = useLoaderData() as HomeProps;
+  const { contents, showing, total } = useLoaderData() as HomeProps
 
   return (
     <div className={styles.container}>

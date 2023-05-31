@@ -1,9 +1,9 @@
-name: Verify
+name: Verify and Deploy
 
 on: [push]
 
 jobs:
-  verify:
+  verify-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,3 +32,19 @@ jobs:
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
         run: npm run build
+
+      - name: Deploy
+        uses: bitovi/github-actions-deploy-serverless-website@main
+        if: github.ref == 'refs/heads/main'
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_SANDBOX}}
+          aws_default_region: us-east-1
+  
+          tf_action: 'apply'
+          tf_state_bucket_destroy: true
+          
+          aws_spa_cdn_enabled: true
+          
+          aws_r53_domain_name: dev.fast-react-static-renderer-vite.com
+          aws_r53_sub_domain_name: spa

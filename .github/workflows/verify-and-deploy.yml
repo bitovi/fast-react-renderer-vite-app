@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: bitovi/github-actions-deploy-serverless-website@vite
+        uses: bitovi/github-actions-deploy-static-site-to-aws@v0.1.0
         if: github.ref == 'refs/heads/main'
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID_SANDBOX}}
